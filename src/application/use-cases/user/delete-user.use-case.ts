@@ -7,16 +7,16 @@ export class DeleteUserUseCase {
     constructor(private readonly userRepository: UserRepository){}
 
     async execute(id: string): Promise<void> {
-        const user = await this.userRepository.findById(id);
+        const userId = new UniqueEntityId(id);
+        const user = await this.userRepository.findById(userId);
         if(!user){
             throw new NotFoundError('Usuário');
         }
 
-        const userId = new UniqueEntityId(id);
         if(!userId.equals(user.id)){
             throw new UnauthorizedError();
         }
 
-        await this.userRepository.delete(id);
+        await this.userRepository.delete(userId);
     }
 }

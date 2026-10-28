@@ -46,26 +46,22 @@ export class User extends Entity<UserProps>{
     get createdAt(): Date { return this._props.createdAt }
     get updatedAt(): Date { return this._props.updatedAt }
 
-    updateName(name: string): void {
-        const newName = Name.create(name);
+    updateName(newName: Name): void {
         this._props.name = newName;
         this.touch();
     }
 
-    updateSlug(slug: string): void {
-        const newSlug = Slug.create(slug);
+    updateSlug(newSlug: Slug): void {
         this._props.slug = newSlug;
         this.touch();
     }
 
-    updateBio(bio: string): void {
-        const newBio = Bio.create(bio);
+    updateBio(newBio: Bio): void {
         this._props.bio = newBio;
         this.touch();
     }
 
-    updateEmail(email: string): void {
-        const newEmail = Email.create(email);
+    updateEmail(newEmail: Email): void {
         this._props.email = newEmail;
         this.touch();
     }
