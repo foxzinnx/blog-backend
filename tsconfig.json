@@ -23,4 +23,5 @@
     "moduleDetection": "force",
     "skipLibCheck": true,
   },
+  "exclude": ["node_modules"]
 }
