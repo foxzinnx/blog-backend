@@ -6,6 +6,7 @@ import { CannotUpdateArchivedPostError } from "../errors/cannot-update-archived-
 import type { Content } from "../value-objects/content.vo.js";
 import type { UniqueEntityId } from "../value-objects/unique-entity-id.vo.js";
 import { InvalidStatusError } from "../errors/invalid-status.error.js";
+import { CannotArchiveDraftPostError } from "../errors/cannot-archive-draft-post.error.js";
 
 interface PostProps {
     authorId: UniqueEntityId;
@@ -97,6 +98,9 @@ export class Post extends Entity<PostProps> {
     }
 
     archive(): void {
+        if(this.status === 'DRAFT'){
+            throw new CannotArchiveDraftPostError();
+        }
         this._props.status = 'ARCHIVED';
         this.touch();
     }
