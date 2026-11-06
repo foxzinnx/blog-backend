@@ -53,7 +53,7 @@ export class InMemoryCommentRepository implements CommentRepository {
     async save(comment: Comment): Promise<void> {
         const index = this.comments.findIndex((c) => c.id.equals(comment.id));
 
-        if(index > 0){
+        if(index >= 0){
             this.comments[index] = comment;
         } else {
             this.comments.push(comment);

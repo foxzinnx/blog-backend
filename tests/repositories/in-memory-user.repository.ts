@@ -24,7 +24,7 @@ export class InMemoryUserRepository implements UserRepository {
     async save(user: User): Promise<void> {
         const index = this.items.findIndex((i) => i.id.equals(user.id));
 
-        if(index > 0) this.items[index] = user;
+        if(index >= 0) this.items[index] = user;
     }
 
     async delete(id: UniqueEntityId): Promise<void> {
