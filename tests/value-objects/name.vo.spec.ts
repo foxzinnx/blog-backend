@@ -33,14 +33,14 @@ describe('Name VO', () => {
             expect(() => Name.create('A')).toThrow();
         });
 
-        it('should throw when name exceeds 100 characters', () => {
-            const maxName = 'A'.repeat(101);
+        it('should throw when name exceeds 70 characters', () => {
+            const maxName = 'A'.repeat(71);
 
             expect(() => Name.create(maxName)).toThrow();
         });
 
-        it('should accept name with exactly 100 characters', () => {
-            const maxName = 'A'.repeat(100);
+        it('should accept name with exactly 70 characters', () => {
+            const maxName = 'A'.repeat(70);
             const name = Name.create(maxName);
 
             expect(name.value).toBe(maxName);
