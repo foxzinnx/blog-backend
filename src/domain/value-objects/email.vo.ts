@@ -12,9 +12,18 @@ export class Email {
         return new Email(Email.validate(email));
     }
 
-    private static isValid(email: string): boolean {
-        const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-        return emailRegex.test(email) && email.length <= 254;
+    get value(): string {
+        return this._value;
+    }
+
+    get domain(): string {
+        const domain = this._value.split('@')[1]!;
+
+        return domain;
+    }
+
+    equals(other: Email): boolean {
+        return this._value === other._value;
     }
 
     private static validate(email: string){
@@ -31,11 +40,17 @@ export class Email {
         return normalized;
     }
 
-    get value(): string {
-        return this._value;
-    }
+    private static isValid(email: string): boolean {
+        const emailRegex = /^[a-zA-Z0-9._%+\-]+@[a-zA-Z0-9.\-]+\.[a-zA-Z]{2,10}$/;
+        if(!emailRegex.test(email)) return false;
+        
+        const [local, domain] = email.split('@');
 
-    equals(other: Email): boolean {
-        return this._value === other._value;
+        if(local?.startsWith('.') || local?.endsWith('.')) return false;
+        if(local?.includes('..')) return false;
+        if(domain?.startsWith('-') || domain?.endsWith('-')) return false;
+        if(domain?.startsWith('.') || domain?.endsWith('.')) return false;
+
+        return true;
     }
 }
