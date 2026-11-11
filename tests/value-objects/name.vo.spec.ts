@@ -30,7 +30,7 @@ describe('Name VO', () => {
         });
 
         it('should throw when name is only whitespace', () => {
-            expect(() => Name.create('A')).toThrow();
+            expect(() => Name.create('  ')).toThrow();
         });
 
         it('should throw when name exceeds 70 characters', () => {
