@@ -4,7 +4,7 @@ import { SlugIsTooShortError } from "../errors/slug-is-too-short.error.js";
 
 export class Slug {
     private static readonly MIN_LENGTH = 3;
-    private static readonly MAX_LENGTH: 50;
+    private static readonly MAX_LENGTH = 50;
     private readonly _value: string;
 
     private constructor(value: string){
@@ -36,8 +36,8 @@ export class Slug {
             .trim()
             .normalize('NFD')
             .replace(/[\u0300-\u036f]/g, "")
-            .replace(/[^a-z0-9\s-]/g, "")
-            .replace(/[\s-]+/g, "-")
+            .replace(/[^a-z0-9-]/g, "")
+            .replace(/-+/g, '-')
             .replace(/^-+|-+\$/g, "");
     }
 
