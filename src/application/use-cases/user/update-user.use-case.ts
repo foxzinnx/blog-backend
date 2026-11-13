@@ -1,7 +1,7 @@
 import type { UpdateUserInputDTO } from "@/application/dtos/user.dto.js";
 import { EmailAlreadyInUseError } from "@/domain/errors/email-already-in-use.error.js";
 import { NotFoundError } from "@/domain/errors/not-found.error.js";
-import { SlugAlreayInUseError } from "@/domain/errors/slug-alreay-in-use.error.js";
+import { SlugAlreadyInUseError } from "@/domain/errors/slug-already-in-use.error.js";
 import type { UserRepository } from "@/domain/repositories/user.repository.js";
 import { Bio } from "@/domain/value-objects/bio.vo.js";
 import { Email } from "@/domain/value-objects/email.vo.js";
@@ -39,7 +39,7 @@ export class UpdateUserUseCase {
         if(input.slug && input.slug !== user.slug.value){
             const existingBySlug = await this.userRepository.findBySlug(input.slug);
             if(existingBySlug){
-                throw new SlugAlreayInUseError();
+                throw new SlugAlreadyInUseError();
             }
             
             const newSlug = Slug.create(input.slug);

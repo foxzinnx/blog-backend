@@ -1,6 +1,6 @@
 import { User } from "../../../domain/entities/user.entity.js";
 import { EmailAlreadyInUseError} from "../../../domain/errors/email-already-in-use.error.js";
-import { SlugAlreayInUseError } from "../../../domain/errors/slug-alreay-in-use.error.js";
+import { SlugAlreadyInUseError } from "../../../domain/errors/slug-already-in-use.error.js";
 import type { UserRepository } from "../../../domain/repositories/user.repository.js";
 import { Email } from "../../../domain/value-objects/email.vo.js";
 import { Name } from "../../../domain/value-objects/name.vo.js";
@@ -22,7 +22,7 @@ export class CreateUserUseCase {
 
         const existingSlug = await this.userRepository.findBySlug(input.slug);
         if(existingSlug){
-            throw new SlugAlreayInUseError();
+            throw new SlugAlreadyInUseError();
         }
 
         const hashedPassword = await this.hasher.hash(input.password);
