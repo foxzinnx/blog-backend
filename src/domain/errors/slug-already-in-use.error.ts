@@ -1,6 +1,6 @@
 import { DomainError } from "./domain-error.js";
 
-export class SlugAlreayInUseError extends DomainError {
+export class SlugAlreadyInUseError extends DomainError {
     readonly code = 'SLUG_ALREADY_IN_USE';
 
     constructor(){

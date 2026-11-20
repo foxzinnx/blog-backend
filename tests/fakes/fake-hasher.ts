@@ -8,5 +8,4 @@ export class FakeHasher implements Hasher {
     async compare(plain: string, hashed: string): Promise<boolean> {
         return hashed === `hashed:${plain}`;
     }
-
 }
